@@ -1,2 +1,1 @@
-# leetcode
-first commit
+# Solutions
