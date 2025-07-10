@@ -19,7 +19,7 @@ void dfs(int node, int parent, vector<vector<int>> &adj, vector<int> &vis, vecto
             low[node] = min(low[node], low[it]);
             
             if(low[it] > tin[node])
-                bridges.push_back({it, node});
+                bridges.push_back({node, it});
         }
     }
 }
@@ -30,7 +30,10 @@ vector<vector<int>> criticalConnections(int n, vector<vector<int>> &adj){
     vector<int> tin(n);
     vector<int> vis(n, 0);
     
-    dfs(0, -1, adj, vis, low, tin, ans);
+    for(int i=0;i<n;i++){
+        if(vis[i] == 0)
+            dfs(i, -1, adj, vis, low, tin, ans);
+    }
     
     return ans;
 }
@@ -52,7 +55,7 @@ int main() {
 	int x = ans.size();
 	cout<<x<<"\n";
 	for(int i=0;i<x;i++){
-	    cout<<ans[i][0]<<" "<<ans[i][1]<<"\n";
+	    cout<<ans[i][0] + 1<<" "<<ans[i][1] + 1<<"\n";
 	}
 	return 0;   
 }
